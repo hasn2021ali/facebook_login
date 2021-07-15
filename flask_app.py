@@ -57,17 +57,23 @@ def callback():
     # Fetch a protected resource, i.e. user profile, via Graph API
 
     facebook_user_data = facebook.get(
-        "https://graph.facebook.com/me?fields=id,name,email,picture{url}"
+        "https://graph.facebook.com/me?fields=id,name,email,posts{place},picture{url}"
     ).json()
-
+    places = []
     email = facebook_user_data["email"]
     name = facebook_user_data["name"]
+    posts = facebook_user_data["posts"]["data"]
+    for place in posts :
+        if place["place"] : 
+            places.append(place) 
+
     picture_url = facebook_user_data.get("picture", {}).get("data", {}).get("url")
 
     return f"""
     User information: <br>
     Name: {name} <br>
     Email: {email} <br>
+    Places: {len(places)} <br>
     Avatar <img src="{picture_url}"> <br>
     <a href="/">Home</a>
     """
