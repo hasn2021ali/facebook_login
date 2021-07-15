@@ -32,7 +32,7 @@ def index():
 @app.route("/fb-login")
 def login():
     facebook = requests_oauthlib.OAuth2Session(
-        FB_CLIENT_ID, redirect_uri=URL + "/fb-callback", scope=FB_SCOPE
+        FB_CLIENT_ID, redirect_uri=URL + "/people/auth/facebook/callback", scope=FB_SCOPE
     )
     authorization_url, _ = facebook.authorization_url(FB_AUTHORIZATION_BASE_URL)
 
