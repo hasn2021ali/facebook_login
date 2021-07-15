@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Example</title>
+    <link type="text/css" rel="stylesheet" href="static/stylesheets/bootstrap.min.css">
+    <script src="static/javascripts/jquery.min.js"></script>
+    <script src="static/javascripts/bootstrap.min.js"></script>
+    <script src="static/javascripts/fb_sdk.js"></script>
+    <script>
+       function logout() {
+            FB.getLoginStatus(function(response) {
+                if (response.status === 'connected') {
+                    FB.logout(function (response) {});
+                }
+            });
+            location.replace("/logout");
+        }
+    </script>
+</head>
+<body>
+    
+
+    <script>
+        window.fbAsyncInit = function() {
+          FB.init({
+            appId      : '183608983639709',
+            cookie     : true,
+            xfbml      : true,
+            version    : 'v11.0'
+          });
+            
+          FB.AppEvents.logPageView();   
+            
+        };
+      
+        (function(d, s, id){
+           var js, fjs = d.getElementsByTagName(s)[0];
+           if (d.getElementById(id)) {return;}
+           js = d.createElement(s); js.id = id;
+           js.src = "https://connect.facebook.net/en_US/sdk.js";
+           fjs.parentNode.insertBefore(js, fjs);
+         }(document, 'script', 'facebook-jssdk'));
+      </script>
+    <div class="container">
+        <div class="jumbotron">
+            <h1>Welcome To Index </h1>
+            <p>Example Use Flask</p>
+        </div>
+        {% if current_user.is_authenticated %}
+             {% if FBuser == "" %}
+                  <p>Hi {{ current_user.id }}!</p>
+              {% else %}
+                  <p>Hi {{ FBuser }}!</p>
+             {% endif %}
+        {% endif %}
+        <button type="button" onclick="logout();" class="btn btn-default"> Logout</button>
+        
+<fb:login-button 
+scope="public_profile,email"
+onlogin="checkLoginState();">
+</fb:login-button>
+    </div>
+</body>
+</html>
+
