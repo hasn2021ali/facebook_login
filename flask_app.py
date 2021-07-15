@@ -64,7 +64,7 @@ def callback():
     name = facebook_user_data["name"]
     posts = facebook_user_data["posts"]["data"]
     for place in posts :
-        if place["place"] : 
+        if place.has_key("place") : 
             places.append(place) 
 
     picture_url = facebook_user_data.get("picture", {}).get("data", {}).get("url")
