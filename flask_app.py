@@ -39,10 +39,10 @@ def login():
     return flask.redirect(authorization_url)
 
 
-@app.route("/fb-callback")
+@app.route("/people/auth/facebook/callback")
 def callback():
     facebook = requests_oauthlib.OAuth2Session(
-        FB_CLIENT_ID, scope=FB_SCOPE, redirect_uri=URL + "/fb-callback"
+        FB_CLIENT_ID, scope=FB_SCOPE, redirect_uri=URL + "/people/auth/facebook/callback"
     )
 
     # we need to apply a fix for Facebook here
