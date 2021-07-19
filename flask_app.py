@@ -147,13 +147,14 @@ def callback():
       
     # finally:
          
-        con.close()
+        # con.close()
     for place in posts :
         if place.__contains__("place") :
             try :
                 with sqlite3.connect("users.db") as con:
                     cur = con.cursor()
                     # = (Int64)Command.ExecuteScalar();
+                    cur.execute('create table if not exists "user_places" ( "id"	INTEGER, "place_id"	TEXT, "name"	TEXT,"lat"	TEXT, "lng"	TEXT, "user_id"	INTEGER, PRIMARY KEY("id" AUTOINCREMENT) )')
                     cur.execute("INSERT INTO user_places (place_id,name,lat,lng, user_id ) VALUES (?,?,?,?,?)",(place["place"]["id"],place["place"]["name"],place["place"]["latitude"],place["place"]["longitude"] , user_id) )
                     
                     con.commit()
