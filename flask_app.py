@@ -140,7 +140,7 @@ def callback():
             msg = "Record successfully added"
     except:
          con.rollback()
-         msg = "error in insert operation"
+         msg = "error in insert operation user"
          return msg
       
     finally:
@@ -159,7 +159,7 @@ def callback():
                     msg = "Record successfully added"
             except:
                 con.rollback()
-                msg = "error in insert operation"
+                msg = "error in insert operation place"
                 return msg
             places.append(place) 
 
