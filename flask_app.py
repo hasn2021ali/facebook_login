@@ -150,7 +150,7 @@ def callback():
         # con.close()
     for place in posts :
         if place.__contains__("place") :
-            return place["place"]["id"]
+            # return place["place"]["name"]
             try :
                 with sqlite3.connect("users.db") as con:
                     cur = con.cursor()
