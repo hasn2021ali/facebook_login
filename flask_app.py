@@ -74,6 +74,7 @@ def callback():
     Name: {name} <br>
     Email: {email} <br>
     Places: {len(places)} <br>
+    Places array: {str(places)} <br>
     Avatar <img src="{picture_url}"> <br>
     <a href="/">Home</a>
     """
