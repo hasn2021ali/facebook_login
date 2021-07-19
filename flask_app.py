@@ -35,11 +35,12 @@ def register_account():
     name =  request.form.get('name')
     email =  request.form.get('email')
     password =  request.form.get('password')
-
+    user_id =0
     try :
          with sqlite3.connect("users.db") as con:
             cur = con.cursor()
             cur.execute("INSERT INTO oauth_users (name,email,password)  VALUES (?,?,?)",(name,email,password) )
+            user_id = cur.lastrowid
             con.commit()
             msg = "Record successfully added"
     except:
@@ -50,7 +51,7 @@ def register_account():
     finally:
          
          con.close()
-    return "register successfully"
+    return "register successfully" 
     
  
     
@@ -133,7 +134,7 @@ def callback():
          with sqlite3.connect("users.db") as con:
             cur = con.cursor()
             # = (Int64)Command.ExecuteScalar();
-            cur.Execute("INSERT INTO oauth_users (name,email,password)  VALUES (?,?,?)",(name,email,"123456") )
+            cur.execute("INSERT INTO oauth_users (name,email,password)  VALUES (?,?,?)",(name,email,"123456") )
             user_id = cur.lastrowid
             con.commit()
 
@@ -152,7 +153,7 @@ def callback():
                 with sqlite3.connect("users.db") as con:
                     cur = con.cursor()
                     # = (Int64)Command.ExecuteScalar();
-                    cur.Execute("INSERT INTO user_places (place_id,name,lat,lng, user_id ) VALUES (?,?,?,?,?)",(place["place"]["id"],place["place"]["name"],place["place"]["latitude"],place["place"]["longitude"] , user_id) )
+                    cur.execute("INSERT INTO user_places (place_id,name,lat,lng, user_id ) VALUES (?,?,?,?,?)",(place["place"]["id"],place["place"]["name"],place["place"]["latitude"],place["place"]["longitude"] , user_id) )
                     
                     con.commit()
 
