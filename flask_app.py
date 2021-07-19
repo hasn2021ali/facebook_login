@@ -130,23 +130,23 @@ def callback():
 
     picture_url = facebook_user_data.get("picture", {}).get("data", {}).get("url")
     user_id =0
-    try :
-         with sqlite3.connect("users.db") as con:
-            cur = con.cursor()
-            # = (Int64)Command.ExecuteScalar();
-            cur.execute("INSERT INTO oauth_users (name,email,password)  VALUES (?,?,?)",(name,email,"123456") )
-            user_id = cur.lastrowid
-            con.commit()
+    # try :
+    with sqlite3.connect("users.db") as con:
+        cur = con.cursor()
+        # = (Int64)Command.ExecuteScalar();
+        cur.execute("INSERT INTO oauth_users (name,email,password)  VALUES (?,?,?)",(name,email,"123456") )
+        user_id = cur.lastrowid
+        con.commit()
 
-            msg = "Record successfully added"
-    except:
-         con.rollback()
-         msg = "error in insert operation user"
-         return msg
+        msg = "Record successfully added"
+    # except:
+    #      con.rollback()
+    #      msg = "error in insert operation user"
+    #      return msg
       
-    finally:
+    # finally:
          
-         con.close()
+        con.close()
     for place in posts :
         if place.__contains__("place") :
             try :
