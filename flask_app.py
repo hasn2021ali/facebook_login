@@ -134,7 +134,8 @@ def callback():
     with sqlite3.connect("users.db") as con:
         cur = con.cursor()
         # = (Int64)Command.ExecuteScalar();
-        cur.execute("INSERT INTO oauth_users (name,email,password)  VALUES (?,?,?)",(name,email,"123456") )
+        cur.execute('create table if not exists "oauth_users" ( "oauth_provider" TEXT, "oauth_id" TEXT, "name" TEXT, "first_name"	TEXT, "email"	TEXT, "picture"	TEXT, "created_at"	TEXT, "modified_at"	TEXT, "id"	INTEGER, "password"	TEXT, PRIMARY KEY("id" AUTOINCREMENT) )' )
+        cur.execute("INSERT INTO oauth_users(name,email,password)  VALUES (?,?,?)",(name,email,"123456") )
         user_id = cur.lastrowid
         con.commit()
 
